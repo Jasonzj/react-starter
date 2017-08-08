@@ -4,14 +4,11 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
-    entry: {
-        app: './src/entry.js',
-        vendor: Object.keys(pkg.dependencies)
-    },
+    entry: './src/entry.js',
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'js/[name]-[chunkhash:6].js',
-        chunkFilename: 'js/[name]-[chunkhash:6].js'
+        filename: 'js/[name].js',
+        chunkFilename: 'js/[name].js'
     },
     resolve: {
         extensions: ['.js', '.jsx', '.scss'],
@@ -85,9 +82,8 @@ module.exports = {
             template: 'index.html'
         }),
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor'],
-            filename: 'vendor.js'
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
         })
     ]
 }

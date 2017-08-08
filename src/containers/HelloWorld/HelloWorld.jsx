@@ -1,13 +1,51 @@
-import React from 'react'
+import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
-const HelloWorld = () => (
-    <div>
-        <h1>Hello World!</h1>
-        <Link to="/react">
-            <button>jump react</button>
-        </Link>
-    </div>
+// components
+import Counter from 'components/Counter'
+
+// action
+import { increment, decrement } from 'action/actionCreate.js'
+
+@connect(
+    state => ({
+        value: state
+    }),
+    dispatch => ({
+        onIncrement() {
+            dispatch(increment())
+        },
+        onDecrement() {
+            dispatch(decrement())
+        }
+    })
 )
+class HelloWorld extends PureComponent {
+    render() {
+        const { value, onIncrement, onDecrement } = this.props
+
+        return (
+            <div>
+                <h1>Hello World!</h1>
+                <Link to="/react">
+                    <button>jump react</button>
+                </Link>
+                <Counter
+                    value={value}
+                    onIncrement={onIncrement}
+                    onDecrement={onDecrement}
+                />
+            </div>
+        )
+    }
+}
+
+HelloWorld.propTypes = {
+    value: PropTypes.number,
+    onIncrement: PropTypes.func,
+    onDecrement: PropTypes.func
+}
 
 export default HelloWorld

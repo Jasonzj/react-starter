@@ -66,19 +66,23 @@ module.exports = {
         ]
     },
     plugins: [
-        new ExtractTextPlugin('style.css'),
+        new ExtractTextPlugin('/css/[name]-[chunkhash:6].css'),
         new htmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html'
         }),
+        new webpack.BannerPlugin("Copyright by jason925645402@gamil.com"),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor'],
-            filename: 'vendor.js'
+            filename: 'js/[name]-[chunkhash:6].js'
         }),
         new webpack.DefinePlugin({
             'process.env': {
                 'NODE_ENV': JSON.stringify('production')
             }
+        }),
+        new webpack.DefinePlugin({
+            __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
         }),
         new webpack.LoaderOptionsPlugin({
             minimize: true

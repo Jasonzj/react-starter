@@ -69,18 +69,6 @@ module.exports = {
             }
         ]
     },
-    // devServer: {
-    //     hot: true,
-    //     compress: true,
-    //     historyApiFallback: true,
-    //     inline: true,
-    //     port: 8000,
-    //     contentBase: path.resolve(__dirname, "build"),
-    //     stats: {
-    //         modules: false,
-    //         chunks: false
-    //     }
-    // },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new htmlWebpackPlugin({

@@ -3,9 +3,11 @@ const path = require('path')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
+require('babel-polyfill')
 
 module.exports = {
     entry: {
+        polyfill: 'babel-polyfill',
         app: './src/entry.js',
         vendor: Object.keys(pkg.dependencies)
     },
@@ -21,13 +23,13 @@ module.exports = {
             path.join(__dirname, './src')
         ],
         alias: {
-            "action" : path.resolve(__dirname, 'src/action'),
-            "components" : path.resolve(__dirname, 'src/components'),
-            "containers" : path.resolve(__dirname, 'src/containers'),
-            "reducers" : path.resolve(__dirname, 'src/reducers'),
-            "utils" : path.resolve(__dirname, 'src/utils'),
-            "public" : path.resolve(__dirname, './public'),
-            "mock" : path.resolve(__dirname, './mock')
+            action: path.resolve(__dirname, 'src/action'),
+            components: path.resolve(__dirname, 'src/components'),
+            containers: path.resolve(__dirname, 'src/containers'),
+            reducers: path.resolve(__dirname, 'src/reducers'),
+            utils: path.resolve(__dirname, 'src/utils'),
+            public: path.resolve(__dirname, './public'),
+            mock: path.resolve(__dirname, './mock')
         }
     },
     module: {
@@ -47,9 +49,9 @@ module.exports = {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: (loader) => [
+                                plugins: loader => [
                                     require('autoprefixer')({
-                                        browsers: ["last 5 versions"]
+                                        browsers: ['last 5 versions']
                                     })
                                 ]
                             }
@@ -71,14 +73,14 @@ module.exports = {
             filename: 'index.html',
             template: 'index.html'
         }),
-        new webpack.BannerPlugin("Copyright by jason925645402@gamil.com"),
+        new webpack.BannerPlugin('Copyright by jason925645402@gamil.com'),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor'],
             filename: 'js/[name]-[chunkhash:6].js'
         }),
         new webpack.DefinePlugin({
             'process.env': {
-                'NODE_ENV': JSON.stringify('production')
+                NODE_ENV: JSON.stringify('production')
             }
         }),
         new webpack.DefinePlugin({

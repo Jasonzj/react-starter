@@ -4,7 +4,12 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
-    entry: './src/entry.js',
+    entry: [
+        'webpack-dev-server/client?http://localhost:3000',
+        'webpack/hot/only-dev-server',
+        'react-hot-loader/patch',
+        './src/entry.js'
+    ],
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: 'js/[name].js',
@@ -17,13 +22,13 @@ module.exports = {
             path.join(__dirname, './src')
         ],
         alias: {
-            "action" : path.resolve(__dirname, 'src/action'),
-            "components" : path.resolve(__dirname, 'src/components'),
-            "containers" : path.resolve(__dirname, 'src/containers'),
-            "reducers" : path.resolve(__dirname, 'src/reducers'),
-            "utils" : path.resolve(__dirname, 'src/utils'),
-            "public" : path.resolve(__dirname, './public'),
-            "mock" : path.resolve(__dirname, './mock')
+            action: path.resolve(__dirname, 'src/action'),
+            components: path.resolve(__dirname, 'src/components'),
+            containers: path.resolve(__dirname, 'src/containers'),
+            reducers: path.resolve(__dirname, 'src/reducers'),
+            utils: path.resolve(__dirname, 'src/utils'),
+            public: path.resolve(__dirname, './public'),
+            mock: path.resolve(__dirname, './mock')
         }
     },
     module: {
@@ -35,7 +40,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use:[
+                use: [
                     {
                         loader: 'style-loader'
                     },
@@ -45,9 +50,9 @@ module.exports = {
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: (loader) => [
+                            plugins: loader => [
                                 require('autoprefixer')({
-                                    browsers: ["last 5 versions"]
+                                    browsers: ['last 5 versions']
                                 })
                             ]
                         }
@@ -64,24 +69,24 @@ module.exports = {
             }
         ]
     },
-    devServer: {
-        hot: true,
-        compress: true,
-        historyApiFallback: true,
-        inline: true,
-        port: 8000,
-        contentBase: path.resolve(__dirname, "build"),
-        stats: {
-            modules: false,
-            chunks: false
-        }
-    },
+    // devServer: {
+    //     hot: true,
+    //     compress: true,
+    //     historyApiFallback: true,
+    //     inline: true,
+    //     port: 8000,
+    //     contentBase: path.resolve(__dirname, "build"),
+    //     stats: {
+    //         modules: false,
+    //         chunks: false
+    //     }
+    // },
     plugins: [
+        new webpack.HotModuleReplacementPlugin(),
         new htmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html'
         }),
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({
             __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
         })

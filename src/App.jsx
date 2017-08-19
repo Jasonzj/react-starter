@@ -29,9 +29,15 @@ const createComponent = component => () => (
     </Bundle>
 )
 
-const store = createStore(
-    counter
-)
+let store = null
+if (__DEV__) {
+    store = createStore(
+        counter,
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+    )
+} else {
+    store = createStore(counter)
+}
 
 const App = () => (
     <Provider store={store}>

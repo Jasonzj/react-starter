@@ -68,12 +68,12 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.BannerPlugin('Copyright by jason925645402@gamil.com'),
         new ExtractTextPlugin('css/style-[chunkhash:6].css'),
         new htmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html'
         }),
-        new webpack.BannerPlugin('Copyright by jason925645402@gamil.com'),
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor'],
             filename: 'js/[name]-[chunkhash:6].js'
@@ -90,11 +90,19 @@ module.exports = {
             minimize: true
         }),
         new webpack.optimize.UglifyJsPlugin({
+            beautify: false,
+            comments: false,
             compress: {
-                warnings: true
+                warnings: false,
+                drop_console: true,
+                collapse_vars: true,
+                reduce_vars: true
             }
         }),
-        new webpack.optimize.AggressiveMergingPlugin(),
+        new webpack.optimize.AggressiveMergingPlugin({
+            minSizeReduce: 1.5,
+            moveToParents: true
+        }),
         new webpack.optimize.OccurrenceOrderPlugin()
     ]
 }

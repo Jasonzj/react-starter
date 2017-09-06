@@ -89,7 +89,13 @@ module.exports = {
         // 代码分割(抽取公共模块)
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor'],
-            filename: 'js/[name]-[chunkhash:8].js'
+            filename: 'js/[name]-[chunkhash:8].js',
+            minChunks: Infinity
+        }),
+
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest',
+            minChunks: Infinity
         }),
 
         // react开启生产环境压缩

@@ -2,6 +2,7 @@ const pkg = require('./package.json')
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
 
@@ -48,7 +49,7 @@ module.exports = {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: (loader) => [
+                                plugins: loader => [
                                     autoprefixer({ browsers: ['last 5 versions'] })
                                 ]
                             }
@@ -71,6 +72,19 @@ module.exports = {
         // css分割
         new ExtractTextPlugin('css/style-[chunkhash:8].css'),
 
+
+        // 代码分割(抽取公共模块)
+        new webpack.optimize.CommonsChunkPlugin({
+            names: ['vendor'],
+            filename: 'js/[name]-[chunkhash:8].js',
+            minChunks: Infinity
+        }),
+
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest',
+            minChunks: Infinity
+        }),
+
         // html模板
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -85,16 +99,9 @@ module.exports = {
             chunksSortMode: 'dependency'
         }),
 
-        // 代码分割(抽取公共模块)
-        new webpack.optimize.CommonsChunkPlugin({
-            names: ['vendor'],
-            filename: 'js/[name]-[chunkhash:8].js',
-            minChunks: Infinity
-        }),
-
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            minChunks: Infinity
+        // 将manifest.js 注入html
+        new InlineManifestWebpackPlugin({
+            name: 'webpackManifest'
         }),
 
         // react开启生产环境压缩

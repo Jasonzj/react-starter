@@ -4,18 +4,16 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
 const autoprefixer = require('autoprefixer')
-require('babel-polyfill')
 
 module.exports = {
     entry: {
-        polyfill: 'babel-polyfill',
         app: './src/entry.js',
         vendor: Object.keys(pkg.dependencies)
     },
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'js/[name]-[chunkhash:6].js',
-        chunkFilename: 'js/[name]-[chunkhash:6].js'
+        filename: 'js/[name]-[chunkhash:8].js',
+        chunkFilename: 'js/[name]-[chunkhash:8].js'
     },
     resolve: {
         extensions: ['.js', '.jsx', '.scss'],
@@ -67,41 +65,55 @@ module.exports = {
         ]
     },
     plugins: [
+        // 插入头
         new webpack.BannerPlugin('Copyright by jason925645402@gamil.com'),
-        new ExtractTextPlugin('css/style-[chunkhash:6].css'),
+
+        // css分割
+        new ExtractTextPlugin('css/style-[chunkhash:8].css'),
+
+        // html模板
         new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html'
         }),
+
+        // 代码分割(抽取公共模块)
         new webpack.optimize.CommonsChunkPlugin({
             names: ['vendor'],
-            filename: 'js/[name]-[chunkhash:6].js'
+            filename: 'js/[name]-[chunkhash:8].js'
         }),
+
+        // react开启生产环境压缩
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify('production')
             }
         }),
+
+        // 设置环境全局变量
         new webpack.DefinePlugin({
             __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
         }),
+
+        // 抽取 manifest
         new webpack.LoaderOptionsPlugin({
             minimize: true
         }),
+
+        // 代码压缩
         new webpack.optimize.UglifyJsPlugin({
-            beautify: false,
-            comments: false,
             compress: {
-                warnings: false,
-                drop_console: true,
-                collapse_vars: true,
-                reduce_vars: true
+                warnings: false
             }
         }),
+
+        // 改善chunk传输
         new webpack.optimize.AggressiveMergingPlugin({
             minSizeReduce: 1.5,
             moveToParents: true
         }),
+
+        // 排序输出
         new webpack.optimize.OccurrenceOrderPlugin()
     ]
 }

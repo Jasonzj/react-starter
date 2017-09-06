@@ -1,6 +1,5 @@
-const pkg = require('./package.json')
 const path = require('path')
-const htmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpack = require('webpack')
 
 module.exports = {
@@ -48,16 +47,6 @@ module.exports = {
                         loader: 'css-loader'
                     },
                     {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: loader => [
-                                require('autoprefixer')({
-                                    browsers: ['last 5 versions']
-                                })
-                            ]
-                        }
-                    },
-                    {
                         loader: 'sass-loader'
                     }
                 ]
@@ -71,7 +60,7 @@ module.exports = {
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new htmlWebpackPlugin({
+        new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html'
         }),

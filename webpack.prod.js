@@ -1,8 +1,9 @@
 const pkg = require('./package.json')
 const path = require('path')
-const htmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
 require('babel-polyfill')
 
 module.exports = {
@@ -49,10 +50,8 @@ module.exports = {
                         {
                             loader: 'postcss-loader',
                             options: {
-                                plugins: loader => [
-                                    require('autoprefixer')({
-                                        browsers: ['last 5 versions']
-                                    })
+                                plugins: (loader) => [
+                                    autoprefixer({ browsers: ['last 5 versions'] })
                                 ]
                             }
                         },
@@ -70,7 +69,7 @@ module.exports = {
     plugins: [
         new webpack.BannerPlugin('Copyright by jason925645402@gamil.com'),
         new ExtractTextPlugin('css/style-[chunkhash:6].css'),
-        new htmlWebpackPlugin({
+        new HtmlWebpackPlugin({
             filename: 'index.html',
             template: 'index.html'
         }),

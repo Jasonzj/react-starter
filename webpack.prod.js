@@ -3,6 +3,7 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const webpack = require('webpack')
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
 module.exports = {
@@ -74,7 +75,15 @@ module.exports = {
         // html模板
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            template: 'index.html'
+            template: 'index.html',
+            inject: true,
+            minify: {
+                removeComments: true,       // 去注释
+                collapseWhitespace: true,   // 压缩空格
+                removeAttributeQuotes: true // 去除属性引用
+            },
+            // 必须通过上面的 CommonsChunkPlugin 的依赖关系自动添加 js，css 等
+            chunksSortMode: 'dependency'
         }),
 
         // 代码分割(抽取公共模块)
@@ -105,6 +114,17 @@ module.exports = {
             compress: {
                 warnings: false
             }
+        }),
+
+        // gzip压缩
+        new CompressionWebpackPlugin({
+            asset: '[path].gz[query]',
+            algorithm: 'gzip',
+            test: new RegExp(
+                '\\.(js|css)$'
+            ),
+            threshold: 10240,
+            minRatio: 0.8
         }),
 
         // 改善chunk传输

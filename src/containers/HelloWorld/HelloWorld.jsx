@@ -30,7 +30,7 @@ class HelloWorld extends PureComponent {
             <div>
                 <h1>Hello World!</h1>
                 <Link to="/react">
-                    <button>jump react</button>
+                    <button>jump react2</button>
                 </Link>
                 <Counter
                     value={value}

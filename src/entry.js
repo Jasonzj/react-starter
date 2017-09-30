@@ -11,10 +11,7 @@ render(
     document.getElementById('root')
 )
 
-if (module.hot) {  
-    // If you use Webpack 2 in ES modules mode, you can
-    // use <App /> here rather than require() a <NextApp />.
-    // 如果用 ES 模块模式的 Webpack 2，可以直接用 <App />
+if (module.hot) {
     module.hot.accept('./App.jsx', () => {
         const NextApp = require('./App.jsx').default
         render(

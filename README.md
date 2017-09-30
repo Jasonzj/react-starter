@@ -4,7 +4,7 @@
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/Jasonzj/react-starter/blob/master/LICENSE)
 
 ### 项目结构
-```bash
+```test
 .
 ├── public                   # 公共静态资源
 ├── src                      # 主目录

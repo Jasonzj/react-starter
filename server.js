@@ -21,11 +21,12 @@ new WebpackDevServer(webpack(config), {
     },
     setup(app) {                   // 访问Express App 对象，添加自定义中间件
         // 代理服务器
-        app.use('/api/*', proxy({
-            target: 'https://www.easy-mock.com/mock/59aa4d41e0dc663341994b23/example',  // 目标host
-            secure: false,
-            changeOrigin: true
-        }))
+        if (process.env.NODE_ENV !== 'production') {
+            app.use('/book/*', proxy({
+                target: 'https://www.easy-mock.com/mock/593611b991470c0ac101d474',  // 目标host
+                secure: false,
+            }))
+        }
     }
 }).listen(
     DEFAULT_PORT,

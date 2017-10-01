@@ -24,7 +24,7 @@ const PUBLIC_PATH = resolve(ROOT_PATH, './public')
 const MOCK_PATH =  resolve(ROOT_PATH, './mock')
 
 // server
-const DEFAULT_PORT = 3000           // 端口
+const DEFAULT_PORT = 8000           // 端口
 const DEFAULT_HOST = 'localhost'    // host地址
 
 // exports

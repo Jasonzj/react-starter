@@ -27,6 +27,9 @@ config.plugins.push(
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'index.html'
+    }),
+    new webpack.SourceMapDevToolPlugin({
+        filename: '[file].map'
     })
 )
 

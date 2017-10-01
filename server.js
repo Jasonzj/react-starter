@@ -1,6 +1,6 @@
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
-const base = require('./webpack.config')
+const base = require('./webpack.dev')
 const proxy = require('http-proxy-middleware')
 
 const DEFAULT_PORT = base.DEFAULT_PORT      // 端口

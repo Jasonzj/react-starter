@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import axios from 'axios'
 
 // components
 import Counter from 'components/Counter'
@@ -23,6 +24,13 @@ import { increment, decrement } from 'action'
     })
 )
 class HelloWorld extends PureComponent {
+    componentWillMount() {
+        axios.get('/api/photo')
+            .then((data) => {
+                console.log(data)
+            })
+    }
+
     render() {
         const { value, onIncrement, onDecrement } = this.props
 

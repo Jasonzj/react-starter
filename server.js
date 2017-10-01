@@ -21,9 +21,11 @@ new WebpackDevServer(webpack(config), {
     },
     setup(app) {                   // 访问Express App 对象，添加自定义中间件
         // 代理服务器
-        app.use('/book/*', proxy({
-            target: 'https://www.easy-mock.com/mock/593611b991470c0ac101d474',      // 目标host
-            secure: false                                                           // 如果你想验证SSL证书
+        app.use('/api', proxy({
+            target: 'http://www.jasonzj.me:4000',                                 // 目标host
+            // secure: false,                                                     // 如果你想验证SSL证书
+            changeOrigin: true,
+            prependPath: false
         }))
     }
 }).listen(

@@ -3,6 +3,7 @@ sudo: false
 language: node_js
 node_js:
   - "7"
+  - "6"
 
 cache:
   directories:
@@ -12,4 +13,4 @@ install:
   - npm install
 
 script:
-  - npm run build
+  - npm run dev

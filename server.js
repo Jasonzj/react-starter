@@ -11,7 +11,7 @@ new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
     hot: true,                     // 启用 webpack 的模块热替换特性
     compress: true,                // 一切服务都启用gzip 压缩
-    historyApiFallback: true,      // 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html
+    historyApiFallback: true,      // 当使用HTML5HistoryAPI时,任意的404响应都可能需要被替代为index.html
     watchOptions: {                // 监听选项
         ignored: /node_modules/,   // 排除监听 node_modules
     },
@@ -24,8 +24,7 @@ new WebpackDevServer(webpack(config), {
         app.use('/api/*', proxy({
             target: 'https://www.easy-mock.com/mock/59aa4d41e0dc663341994b23/example',  // 目标host
             secure: false,
-            // changeOrigin: true,
-            // prependPath: false
+            changeOrigin: true
         }))
     }
 }).listen(

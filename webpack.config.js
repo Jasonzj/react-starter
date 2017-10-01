@@ -21,10 +21,12 @@ module.exports = {
             path.join(__dirname, './src')
         ],
         alias: {
-            action: path.resolve(__dirname, 'src/action'),
+            action: path.resolve(__dirname, 'src/redux/action'),
+            reducers: path.resolve(__dirname, 'src/redux/reducers'),
+            store: path.resolve(__dirname, 'src/redux/store'),
+            router: path.resolve(__dirname, 'src/router'),
             components: path.resolve(__dirname, 'src/components'),
             containers: path.resolve(__dirname, 'src/containers'),
-            reducers: path.resolve(__dirname, 'src/reducers'),
             utils: path.resolve(__dirname, 'src/utils'),
             public: path.resolve(__dirname, './public'),
             mock: path.resolve(__dirname, './mock')

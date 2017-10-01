@@ -1,8 +1,10 @@
+import { SET_INCREMENT, SET_DECREMENT } from 'action'
+
 const counter = (state = 0, action) => {
     switch (action.type) {
-        case 'INCREMENT':
+        case SET_INCREMENT:
             return state + 1
-        case 'DECREMENT':
+        case SET_DECREMENT:
             return state - 1
         default:
             return state

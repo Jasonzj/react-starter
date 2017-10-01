@@ -7,7 +7,7 @@ import PropTypes from 'prop-types'
 import Counter from 'components/Counter'
 
 // action
-import { increment, decrement } from 'action/actionCreate.js'
+import { increment, decrement } from 'action'
 
 @connect(
     state => ({

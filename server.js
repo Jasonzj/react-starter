@@ -1,10 +1,11 @@
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
-const config = require('./webpack.config')
+const base = require('./webpack.config')
 const proxy = require('http-proxy-middleware')
 
-const DEFAULT_PORT = 3000
-const DEFAULT_HOST = 'localhost'
+const DEFAULT_PORT = base.DEFAULT_PORT      // 端口
+const DEFAULT_HOST = base.DEFAULT_HOST      // host
+const config = base.config                  // config
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
@@ -25,7 +26,11 @@ new WebpackDevServer(webpack(config), {
             secure: false                                                           // 如果你想验证SSL证书
         }))
     }
-}).listen(DEFAULT_PORT, DEFAULT_HOST, (err, result) => {
-    if (err) return console.log(err)
-    console.log(`开始监听: ${DEFAULT_PORT}端口, 地址:http://localhost:${DEFAULT_PORT}/`)
-})
+}).listen(
+    DEFAULT_PORT,
+    DEFAULT_HOST,
+    (err, result) => {
+        if (err) return console.log(err)
+        console.log(`开始监听: ${DEFAULT_PORT}端口, 地址:http://localhost:${DEFAULT_PORT}/`)
+    }
+)

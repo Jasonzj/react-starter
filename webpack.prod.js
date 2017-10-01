@@ -113,7 +113,7 @@ module.exports = {
 
         // 设置环境全局变量
         new webpack.DefinePlugin({
-            __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV == 'dev') || 'false'))
+            __DEV__: JSON.stringify(JSON.parse((process.env.NODE_ENV === 'dev') || 'false'))
         }),
 
         // 抽取 manifest

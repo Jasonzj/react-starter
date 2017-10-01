@@ -3,30 +3,29 @@ const WebpackDevServer = require('webpack-dev-server')
 const config = require('./webpack.config')
 const proxy = require('http-proxy-middleware')
 
-const port = 3000
-const host = 'localhost'
+const DEFAULT_PORT = 3000
+const DEFAULT_HOST = 'localhost'
 
 new WebpackDevServer(webpack(config), {
     publicPath: config.output.publicPath,
-    hot: true,
-    compress: true,
-    historyApiFallback: true,
-    watchOptions: {
-        ignored: /node_modules/,
+    hot: true,                     // 启用 webpack 的模块热替换特性
+    compress: true,                // 一切服务都启用gzip 压缩
+    historyApiFallback: true,      // 当使用 HTML5 History API 时，任意的 404 响应都可能需要被替代为 index.html
+    watchOptions: {                // 监听选项
+        ignored: /node_modules/,   // 排除监听 node_modules
     },
-    stats: {
-        modules: false,
-        chunks: false
+    stats: {                       // 控制包显示的内容
+        modules: false,            // 增加内置的模块信息
+        chunks: false              // 增加包信息
     },
-    setup(app) {
+    setup(app) {                   // 访问Express App 对象，添加自定义中间件
+        // 代理服务器
         app.use('/book/*', proxy({
-            target: 'https://www.easy-mock.com/mock/593611b991470c0ac101d474',
-            secure: false
+            target: 'https://www.easy-mock.com/mock/593611b991470c0ac101d474',      // 目标host
+            secure: false                                                           // 如果你想验证SSL证书
         }))
     }
-}).listen(port, host, (err, result) => {
-    if (err) {
-        return console.log(err);
-    }
-    console.log('Listening at http://localhost:3000/')
+}).listen(DEFAULT_PORT, DEFAULT_HOST, (err, result) => {
+    if (err) return console.log(err)
+    console.log(`开始监听: ${DEFAULT_PORT}端口, 地址:http://localhost:${DEFAULT_PORT}/`)
 })

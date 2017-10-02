@@ -10,7 +10,7 @@ const config = base.config
 
 config.entry = {
     app: base.APP_PATH,
-    vendor: Object.keys(pkg.dependencies)
+    vendor: Object.keys(pkg.dependencies).filter(key => key !== 'babel-runtime')
 }
 
 config.output.filename = 'js/[name]-[chunkhash:8].js'

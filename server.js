@@ -7,7 +7,6 @@ const DEFAULT_PORT = base.DEFAULT_PORT      // 端口
 const DEFAULT_HOST = base.DEFAULT_HOST      // host
 const config = base.config                  // config
 
-console.log(config.output.path)
 new WebpackDevServer(webpack(config), {
     hot: true,                     // 启用 webpack 的模块热替换特性
     compress: true,                // 一切服务都启用 gzip 压缩

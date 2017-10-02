@@ -7,10 +7,10 @@ const DEFAULT_PORT = base.DEFAULT_PORT      // 端口
 const DEFAULT_HOST = base.DEFAULT_HOST      // host
 const config = base.config                  // config
 
+console.log(config.output.path)
 new WebpackDevServer(webpack(config), {
-    publicPath: config.output.publicPath,
     hot: true,                     // 启用 webpack 的模块热替换特性
-    compress: true,                // 一切服务都启用gzip 压缩
+    compress: true,                // 一切服务都启用 gzip 压缩
     historyApiFallback: true,      // 当使用HTML5HistoryAPI时,任意的404响应都可能需要被替代为index.html
     watchOptions: {                // 监听选项
         ignored: /node_modules/,   // 排除监听 node_modules

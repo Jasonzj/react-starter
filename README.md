@@ -6,7 +6,7 @@
 
 
 集成了react开发常用技术桟
-`react@v16.0.0 + redux + router4 + webpack3 + es6/es7 + sass + proxy + 组件懒加载 +热加载`
+*react@v16.0.0 + redux + router4 + webpack3 + es6/es7 + sass + proxy + 组件懒加载 +热加载*
 
 ## Installation
 download项目到本地，或者git clone

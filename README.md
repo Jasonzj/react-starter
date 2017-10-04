@@ -44,5 +44,9 @@ npm run build
 │       ├── reducers         # redux的数据管理中心
 │       ├── action           # redux的控制中心
 │       ├── store            # reduxStore
+├── server.js                # 前端服务器
+├── webpack.base.js          # webpack基本配置
+├── webpack.dev.js           # webpack 开发环境 配置
+├── webpack.prod.js          # webpack 生产环境 配置
 └── mock                     # 静态数据           
 ```

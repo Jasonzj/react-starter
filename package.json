@@ -66,6 +66,9 @@
   "jest": {
     "collectCoverageFrom": [
       "**/*.{js,jsx}"
-    ]
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest"
+    }
   }
 }

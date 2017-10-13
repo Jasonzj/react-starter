@@ -24,6 +24,7 @@ new WebpackDevServer(webpack(config), {
             app.use('/book/*', proxy({
                 target: 'https://www.easy-mock.com/mock/593611b991470c0ac101d474',  // 目标host
                 secure: false,
+
             }))
         }
     }
@@ -32,6 +33,6 @@ new WebpackDevServer(webpack(config), {
     DEFAULT_HOST,
     (err, result) => {
         if (err) return console.log(err)
-        console.log(`开始监听: ${DEFAULT_PORT}端口, 地址:http://localhost:${DEFAULT_PORT}/`)
+        console.log(`开始监听: ${DEFAULT_PORT}端口, 监听地址:http://localhost:${DEFAULT_PORT}/`)
     }
 )

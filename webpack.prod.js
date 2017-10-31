@@ -4,6 +4,7 @@ const base = require('./webpack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
 const webpack = require('webpack')
 
 const config = base.config
@@ -80,7 +81,10 @@ const plugins = [
     }),
 
     // 排序输出
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
+
+    // 分析模块
+    new BundleAnalyzerPlugin()
 ]
 
 config.plugins = config.plugins.concat(plugins)

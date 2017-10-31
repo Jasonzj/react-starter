@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // config
 const config = base.config
-
 const loaderUse = ['style-loader', 'css-loader', 'sass-loader']
 
 config.entry = [

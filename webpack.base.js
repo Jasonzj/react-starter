@@ -1,7 +1,5 @@
 const path = require('path')
 const webpack = require('webpack')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
-const autoprefixer = require('autoprefixer')
 
 const isDev = process.env.NODE_ENV === 'dev'
 console.log(`当前运行环境：${isDev ? 'development' : 'production'}`)
@@ -33,20 +31,10 @@ exports.DEFAULT_HOST = DEFAULT_HOST
 exports.NODE_MODULES_PATH = NODE_MODULES_PATH
 exports.APP_PATH = APP_PATH
 exports.SRC_PATH = SRC_PATH
+exports.BUILD_PATH = BUILD_PATH
 
 // config
 exports.config = {
-    entry: [
-        `webpack-dev-server/client?http://${DEFAULT_HOST}:${DEFAULT_PORT}`,
-        'webpack/hot/only-dev-server',
-        'react-hot-loader/patch',
-        APP_PATH
-    ],
-    output: {
-        path: BUILD_PATH,
-        filename: 'js/[name].js',
-        chunkFilename: 'js/[name].js'
-    },
     resolve: {
         extensions: ['.js', '.jsx', '.scss', '.css'],
         modules: [
@@ -70,26 +58,6 @@ exports.config = {
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader?cacheDirectory',
-                exclude: NODE_MODULES_PATH,
-                include: SRC_PATH
-            },
-            {
-                test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        'css-loader',
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                plugins: loader => [
-                                    autoprefixer({ browsers: ['last 5 versions'] })
-                                ]
-                            }
-                        },
-                        'sass-loader'
-                    ]
-                }),
                 exclude: NODE_MODULES_PATH,
                 include: SRC_PATH
             },

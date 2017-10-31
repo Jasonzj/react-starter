@@ -5,7 +5,26 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const InlineManifestWebpackPlugin = require('inline-manifest-webpack-plugin')
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+const autoprefixer = require('autoprefixer')
 const webpack = require('webpack')
+
+const postCssLoader = {
+    loader: 'postcss-loader',
+    options: {
+        plugins: loader => [
+            autoprefixer({ browsers: ['last 5 versions'] })
+        ]
+    }
+}
+
+const extractCss = ExtractTextPlugin.extract({
+    fallback: 'style-loader',
+    use: [
+        'css-loader',
+        postCssLoader,
+        'sass-loader'
+    ]
+})
 
 const config = base.config
 
@@ -14,10 +33,28 @@ config.entry = {
     vendor: Object.keys(pkg.dependencies).filter(key => key !== 'babel-runtime')
 }
 
-config.output.filename = 'js/[name]-[chunkhash:8].js'
-config.output.chunkFilename = 'js/[name]-[chunkhash:8].js'
+config.output = {
+    path: base.BUILD_PATH,
+    filename: 'js/[name]-[chunkhash:8].js',
+    chunkFilename: 'js/[name]-[chunkhash:8].js'
+}
 
-const plugins = [
+config.module.rules.push(
+    {
+        test: /\.scss$/,
+        use: extractCss,
+        exclude: base.NODE_MODULES_PATH,
+        include: base.SRC_PATH
+    },
+    {
+        test: /\.css$/,
+        use: extractCss.pop(),
+        exclude: base.NODE_MODULES_PATH,
+        include: base.SRC_PATH
+    }
+)
+
+config.plugins.push(
     // 插入头
     new webpack.BannerPlugin('Copyright by jason925645402@gamil.com'),
 
@@ -85,8 +122,6 @@ const plugins = [
 
     // 分析模块
     new BundleAnalyzerPlugin()
-]
-
-config.plugins = config.plugins.concat(plugins)
+)
 
 module.exports = config

@@ -17,15 +17,6 @@ const postCssLoader = {
     }
 }
 
-const extractCss = ExtractTextPlugin.extract({
-    fallback: 'style-loader',
-    use: [
-        'css-loader',
-        postCssLoader,
-        'sass-loader'
-    ]
-})
-
 const config = base.config
 
 config.entry = {
@@ -42,13 +33,26 @@ config.output = {
 config.module.rules.push(
     {
         test: /\.scss$/,
-        use: extractCss,
+        use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+                'css-loader',
+                postCssLoader,
+                'sass-loader'
+            ]
+        }),
         exclude: base.NODE_MODULES_PATH,
         include: base.SRC_PATH
     },
     {
         test: /\.css$/,
-        use: extractCss.pop(),
+        use: ExtractTextPlugin.extract({
+            fallback: 'style-loader',
+            use: [
+                'css-loader',
+                postCssLoader
+            ]
+        }),
         exclude: base.NODE_MODULES_PATH,
         include: base.SRC_PATH
     }

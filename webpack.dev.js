@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // config
 const config = base.config
-const loaderUse = ['style-loader', 'css-loader', 'sass-loader']
 
 config.entry = [
     `webpack-dev-server/client?http://${base.DEFAULT_HOST}:${base.DEFAULT_PORT}`,
@@ -22,13 +21,13 @@ config.output =  {
 config.module.rules.push(
     {
         test: /\.scss$/,
-        use: loaderUse,
+        use: ['style-loader', 'css-loader', 'sass-loader'],
         exclude: base.NODE_MODULES_PATH,
         include: base.SRC_PATH
     },
     {
         test: /\.css$/,
-        use: loaderUse.pop(),
+        use: ['style-loader', 'css-loader'],
         exclude: base.NODE_MODULES_PATH,
         include: base.SRC_PATH
     }
@@ -44,5 +43,7 @@ config.plugins.push(
         filename: '[file].map'
     })
 )
+
+console.log(config.module.rules)
 
 module.exports = base

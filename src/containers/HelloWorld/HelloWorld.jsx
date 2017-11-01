@@ -8,20 +8,22 @@ import PropTypes from 'prop-types'
 import Counter from 'components/Counter'
 
 // action
-import * as action from 'action'
+import { actions as countActions } from 'ducks/count'
+import { actions as dataActions } from 'ducks/data'
+
+const actions = { ...countActions, ...dataActions }
 
 @connect(
     state => ({
-        value: state.counter,
-        data: state.data
+        ...state
     }),
-    dispatch => bindActionCreators({ ...action }, dispatch)
+    dispatch => bindActionCreators({ ...actions }, dispatch)
 )
 class HelloWorld extends PureComponent {
     render() {
         const {
             data,
-            value,
+            count,
             getData,
             onIncrement,
             onDecrement,
@@ -36,7 +38,7 @@ class HelloWorld extends PureComponent {
                     <button>jump react</button>
                 </Link>
                 <Counter
-                    value={value}
+                    value={count}
                     onIncrement={onIncrement}
                     onDecrement={onDecrement}
                     onIncrementAsync={onIncrementAsync}
@@ -45,8 +47,8 @@ class HelloWorld extends PureComponent {
                 />
                 {
                     data.map(item => (
-                        <p key={item.id}>
-                            {item.text}
+                        <p key={item.uid}>
+                            {item.name}
                         </p>
                     ))
                 }
@@ -57,7 +59,7 @@ class HelloWorld extends PureComponent {
 
 HelloWorld.propTypes = {
     data: PropTypes.any,
-    value: PropTypes.number,
+    count: PropTypes.number,
     onIncrement: PropTypes.func,
     onDecrement: PropTypes.func,
     onIncrementAsync: PropTypes.func,

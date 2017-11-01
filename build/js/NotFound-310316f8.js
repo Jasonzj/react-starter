@@ -1,0 +1,2 @@
+/*! Copyright by jason925645402@gamil.com */
+webpackJsonp([1],{162:function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});var u=n(0),l=function(e){return e&&e.__esModule?e:{default:e}}(u),o=function(){return l.default.createElement("h1",null,"404 not found page")};t.default=o}});

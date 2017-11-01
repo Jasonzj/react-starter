@@ -44,6 +44,4 @@ config.plugins.push(
     })
 )
 
-console.log(config.module.rules)
-
 module.exports = base

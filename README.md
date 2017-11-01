@@ -40,10 +40,7 @@ npm run build
 │   ├── Components           # 全局可复用组件
 │   ├── Containers           # 路由级别组件
 │   ├── Router               # 路由管理
-│   ├── Redux                # Redux管理
-│       ├── reducers         # redux的数据管理中心
-│       ├── action           # redux的控制中心
-│       ├── store            # reduxStore
+│   ├── ducks                # Redux管理
 ├── server.js                # 前端服务器
 ├── webpack.base.js          # webpack基本配置
 ├── webpack.dev.js           # webpack 开发环境 配置

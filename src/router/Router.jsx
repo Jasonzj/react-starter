@@ -11,7 +11,7 @@ import HomeContainer from 'containers/HomeContainer'
 import HelloWorld from 'containers/HelloWorld'
 
 // lazyContainer
-const HelloReact = asyncComponent(() => import(/* webpackChunkName: "HelloReact" */ '../containers/HelloReact/index'))
+const HelloReact = asyncComponent(() => import(/* webpackChunkName: "HelloReact" */ '../containers/HelloReact/HelloReact.jsx'))
 const NotFound = asyncComponent(() => import(/* webpackChunkName: "NotFound" */ '../containers/404'))
 
 const RouteConfig = () => (

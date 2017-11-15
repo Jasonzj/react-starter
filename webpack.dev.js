@@ -6,9 +6,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const config = base.config
 
 config.entry = [
+    'react-hot-loader/patch',
     `webpack-dev-server/client?http://${base.DEFAULT_HOST}:${base.DEFAULT_PORT}`,
     'webpack/hot/only-dev-server',
-    'react-hot-loader/patch',
     base.APP_PATH
 ]
 
@@ -35,6 +35,8 @@ config.module.rules.push(
 
 config.plugins.push(
     new webpack.HotModuleReplacementPlugin(),
+    new webpack.NamedModulesPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
         filename: 'index.html',
         template: 'index.html'

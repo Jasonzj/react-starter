@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const base = require('./webpack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const OpenBrowserPlugin = require('open-browser-webpack-plugin')
 
 // config
 const { config } = base
@@ -43,7 +44,8 @@ config.plugins.push(
     }),
     new webpack.SourceMapDevToolPlugin({
         filename: '[file].map'
-    })
+    }),
+    new OpenBrowserPlugin({ url: `http://${base.DEFAULT_HOST}:${base.DEFAULT_PORT}` })
 )
 
 module.exports = base

@@ -17,7 +17,7 @@ const postCssLoader = {
     }
 }
 
-const config = base.config
+const { config } = base
 
 config.entry = {
     app: base.APP_PATH,

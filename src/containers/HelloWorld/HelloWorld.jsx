@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
@@ -60,11 +60,11 @@ class HelloWorld extends PureComponent {
 HelloWorld.propTypes = {
     data: PropTypes.any,
     count: PropTypes.number,
+    getData: PropTypes.func,
     onIncrement: PropTypes.func,
     onDecrement: PropTypes.func,
     onIncrementAsync: PropTypes.func,
     onDecrementAsync: PropTypes.func,
-    getData: PropTypes.func,
 }
 
 export default HelloWorld

@@ -10,7 +10,8 @@
   "scripts": {
     "dev": "NODE_ENV=dev node server.js",
     "build": "rm -rf ./build && NODE_ENV=production webpack --config webpack.prod.js --colors",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint --ext .js src"
   },
   "author": "Jason",
   "license": "MIT",

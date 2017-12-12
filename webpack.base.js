@@ -5,7 +5,7 @@ const isDev = process.env.NODE_ENV === 'dev'
 console.log(`当前运行环境：${isDev ? 'development' : 'production'}`)
 
 // 路径
-const resolve = path.resolve
+const { resolve } = path
 const ROOT_PATH = resolve(__dirname)
 const SRC_PATH = resolve(ROOT_PATH, 'src')
 const APP_PATH = resolve(SRC_PATH, 'entry.js')
@@ -51,6 +51,16 @@ exports.config = {
     },
     module: {
         rules: [
+            {
+                test: /\.(js|jsx)$/,
+                enforce: 'pre',
+                use: [{
+                    loader: 'eslint-loader',
+                    options: { fix: true }
+                }],
+                include: SRC_PATH,
+                exclude: NODE_MODULES_PATH
+            },
             {
                 test: /\.(js|jsx)$/,
                 loader: 'babel-loader?cacheDirectory',

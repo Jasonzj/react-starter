@@ -3,7 +3,7 @@ const base = require('./webpack.base')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // config
-const config = base.config
+const { config } = base
 
 config.entry = [
     'react-hot-loader/patch',

@@ -11,7 +11,7 @@ const Counter = ({
 }) => (
     <div>
         <h1>{ value }</h1>
-        <button onClick={onIncrement}>+</button>
+        <button className="add" onClick={onIncrement}>+</button>
         <button onClick={onDecrement}>-</button>
         <button onClick={onIncrementAsync}>async +</button>
         <button onClick={onDecrementAsync}>saync -</button>

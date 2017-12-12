@@ -11,6 +11,7 @@
     "dev": "NODE_ENV=dev node server.js",
     "build": "rm -rf ./build && NODE_ENV=production webpack --config webpack.prod.js --colors",
     "test": "jest",
+    "cov": "jest --coverage",
     "lint": "eslint --ext .js src"
   },
   "author": "Jason",
@@ -72,8 +73,27 @@
     "collectCoverageFrom": [
       "**/*.{js,jsx}"
     ],
+    "setupFiles": [
+      "<rootDir>/test/shim.js",
+      "<rootDir>/test/setup.js"
+    ],
+    "moduleFileExtensions": [
+      "",
+      "js",
+      "jsx",
+      "scss"
+    ],
+    "modulePaths": [
+      "src"
+    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
+    },
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js",
+      ".*\\.(css|less|scss)$": "<rootDir>/test/__mocks__/styleMock.js",
+      ".style": "<rootDir>/test/__mocks__/styleMock.js",
+      "^components(.*)$": "<rootDir>/src/components$1"
     }
   }
 }

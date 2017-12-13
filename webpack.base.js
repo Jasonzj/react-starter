@@ -1,8 +1,10 @@
 const path = require('path')
+const chalk = require('chalk')
 const webpack = require('webpack')
 
 const isDev = process.env.NODE_ENV === 'dev'
-console.log(`当前运行环境：${isDev ? 'development' : 'production'}`)
+const env = chalk.red(`${isDev ? 'development' : 'production'}`)
+console.log(chalk.green(`当前运行环境：${env}`))
 
 // 路径
 const { resolve } = path

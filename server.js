@@ -1,11 +1,12 @@
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
 const base = require('./webpack.dev')
+const chalk = require('chalk')
 const proxy = require('http-proxy-middleware')
 
-const DEFAULT_PORT = base.DEFAULT_PORT      // 端口
-const DEFAULT_HOST = base.DEFAULT_HOST      // host
-const config = base.config                  // config
+const { DEFAULT_PORT } = base      // 端口
+const { DEFAULT_HOST } = base      // host
+const { config } = base            // config
 
 new WebpackDevServer(webpack(config), {
     hot: true,                     // 启用 webpack 的模块热替换特性
@@ -32,6 +33,6 @@ new WebpackDevServer(webpack(config), {
     DEFAULT_HOST,
     (err, result) => {
         if (err) return console.log(err)
-        console.log(`开始监听: ${DEFAULT_PORT}端口, 监听地址:http://localhost:${DEFAULT_PORT}/`)
+        console.log(chalk.green(`开始监听: ${DEFAULT_PORT}端口, 监听地址:http://localhost:${DEFAULT_PORT}/`))
     }
 )

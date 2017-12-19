@@ -1,30 +1,14 @@
-# React-Starter
+# React-Starter 模板
 [![Build Status](https://travis-ci.org/Jasonzj/react-starter.svg?branch=master)](https://travis-ci.org/Jasonzj/react-starter)
 [![Travis](https://img.shields.io/badge/code%20style-airbnb-green.svg)](https://github.com/airbnb/javascript)
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](https://github.com/Jasonzj/react-starter/blob/master/LICENSE)
 [![codebeat badge](https://codebeat.co/badges/3b0e69c4-fc7e-4c87-a854-a0b6f5510299)](https://codebeat.co/projects/github-com-jasonzj-react-starter-master)
 
-
 集成了react开发常用技术桟
 *react@v16.0.0 + redux + router4 + webpack3 + es6/es7 + sass + proxy + 组件懒加载 +热加载...
 
 ## Installation
-download项目到本地，或者git clone
-
-1. 安装项目依赖包
-```bash
-npm install 或 yarn install
-```
-
-2. 运行dev-server
-```bash
-npm run dev
-```
-
-3. 打包
-```bash
-npm run build
-```
+快速构建脚手架: [react-starter-cli](https://github.com/Jasonzj/react-starter-cli)
 
 ## 项目结构
 ```test

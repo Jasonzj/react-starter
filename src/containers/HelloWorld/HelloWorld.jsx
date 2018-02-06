@@ -20,6 +20,20 @@ const actions = { ...countActions, ...dataActions }
     dispatch => bindActionCreators({ ...actions }, dispatch)
 )
 class HelloWorld extends PureComponent {
+    static propTypes = {
+        data: PropTypes.any,
+        count: PropTypes.number,
+        getData: PropTypes.func,
+        onIncrement: PropTypes.func,
+        onDecrement: PropTypes.func,
+        onIncrementAsync: PropTypes.func,
+        onDecrementAsync: PropTypes.func
+    }
+
+    state = {
+        count: this.props.count
+    }
+
     render() {
         const {
             data,
@@ -30,6 +44,8 @@ class HelloWorld extends PureComponent {
             onIncrementAsync,
             onDecrementAsync,
         } = this.props
+
+        console.log(this.state.count)
 
         return (
             <div>
@@ -55,16 +71,6 @@ class HelloWorld extends PureComponent {
             </div>
         )
     }
-}
-
-HelloWorld.propTypes = {
-    data: PropTypes.any,
-    count: PropTypes.number,
-    getData: PropTypes.func,
-    onIncrement: PropTypes.func,
-    onDecrement: PropTypes.func,
-    onIncrementAsync: PropTypes.func,
-    onDecrementAsync: PropTypes.func,
 }
 
 export default HelloWorld

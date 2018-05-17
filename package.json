@@ -1,7 +1,7 @@
 {
-  "name": "react-starter",
-  "version": "1.1.1",
-  "description": "React、Router、Redux、WebPack、 ES6、SASS, 热更新react-hot-loader V3",
+  "name": "{{projectName}}",
+  "version": "{{projectVersion}}",
+  "description": "{{projectDescription}}",
   "repository": {
     "type": "git",
     "url": "git:https://github.com/Jasonzj/react-starter.git"
